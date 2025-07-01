@@ -7,31 +7,33 @@
 
 <h2>Login</h2>
 
-<form asp-action="Login" method="post" class="form-horizontal">
-    <div asp-validation-summary="All" class="text-danger"></div>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        @Html.LabelFor(m => m.Email, "Email Address", htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+        @Html.LabelFor(m => m.Password, "Password", htmlAttributes: new { @class = "control-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter your password" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
         <div class="checkbox">
             <label>
-                <input asp-for="RememberMe" /> @Html.DisplayNameFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.DisplayNameFor(m => m.RememberMe)
             </label>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Log in</button>
-</form>
+    <button type="submit" class="btn btn-primary">Sign In</button>
+}
 
 @section Scripts {
     @{

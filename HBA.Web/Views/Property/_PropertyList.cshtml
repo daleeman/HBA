@@ -30,7 +30,7 @@
                 {
                     <td>@property.CommissionValue.ToString("C")</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@property.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/Property/Edit?id=@property.Id" class="btn btn-sm btn-warning">Edit</a>
                         <a propertyId="@property.Id" class="btn btn-sm btn-danger deleteProperty">Delete</a>
                     </td>
                 }
@@ -38,3 +38,32 @@
         }
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function(){
+
+        $('.deleteProperty').click(function(){
+        var propertyId = $(this).attr('propertyId');
+
+                $.ajax({
+                    url: '/Property/Delete',
+                    type: 'POST',
+                    data: {
+                        id: propertyId,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload(); // redirect
+                        } else {
+                            alert("Error: " + response.error);
+                        }
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+        });
+
+    });
+</script>

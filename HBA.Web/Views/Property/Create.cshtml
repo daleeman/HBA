@@ -7,40 +7,36 @@
 
 <h2>Create Property</h2>
 
-<form asp-action="Create" method="post">
+@using (Html.BeginForm("Create", "Property", FormMethod.Post))
+{
     <div class="form-group">
-        <label asp-for="PropertyName"></label>
-        <input asp-for="PropertyName" class="form-control" />
-        <span asp-validation-for="PropertyName" class="text-danger"></span>
+        @Html.LabelFor(model => model.PropertyName)
+        @Html.TextBoxFor(model => model.PropertyName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PropertyName, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        <label asp-for="PropertyTypeId"></label>
-        <select asp-for="PropertyTypeId" class="form-control"
-                asp-items="ViewBag.PropertyTypes">
-            <option value="">Select Property Type</option>
-        </select>
-        <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
+        @Html.LabelFor(model => model.PropertyTypeId)
+        @Html.DropDownListFor(model => model.PropertyTypeId, ViewBag.PropertyTypes as IEnumerable<SelectListItem>, "Select Property Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        <label asp-for="Location"></label>
-        <input asp-for="Location" class="form-control" />
-        <span asp-validation-for="Location" class="text-danger"></span>
+        @Html.LabelFor(model => model.Location)
+        @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
-        <label asp-for="Price"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
+        @Html.LabelFor(model => model.Price)
+        @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
     </div>
 
     <button type="submit" class="btn btn-success">Create</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+    <a href="/Property/Index" class="btn btn-secondary">Cancel</a>
+}
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }
