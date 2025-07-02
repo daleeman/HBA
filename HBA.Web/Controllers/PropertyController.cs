@@ -5,9 +5,6 @@ using HBA.Web.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Threading.Tasks;
 
 namespace HBA.Web.Controllers
 {
